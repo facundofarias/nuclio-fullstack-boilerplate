@@ -30,7 +30,7 @@ Route::get('users/username/{username}', 'UserController@getByUsername');
 Route::get('boards', 'BoardController@all');
 Route::get('boards/{id}', 'BoardController@getById');
 Route::get('boards/user/{userId}', 'BoardController@getByUser');
-// Route::post('boards', 'BoardController@create');
+Route::post('boards', 'BoardController@create');
 
 /*
 |--------------------------------------------------------------------------
@@ -40,4 +40,4 @@ Route::get('boards/user/{userId}', 'BoardController@getByUser');
 Route::get('pins', 'PinController@all');
 Route::get('pins/{id}', 'PinController@getById');
 Route::get('pins/board/{boardId}', 'PinController@GetByBoard');
-// Route::post('pins', 'PinController@create');
+Route::post('pins', 'PinController@create');

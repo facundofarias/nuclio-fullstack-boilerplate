@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Response;
+use Validator;
 use App\Board;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -28,7 +30,17 @@ class BoardController extends Controller
      */
     public function create(Request $request)
     {
-        // Validate the request...
+        $boardValidator = Validator::make($request->all(), [
+            'name' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string','max:255'],
+            'user_id' => ['required', 'integer'],
+        ]);
+
+        if($boardValidator->fails()) {
+            $errors = $boardValidator->errors()->getMessages();
+            $code = Response::HTTP_NOT_ACCEPTABLE; // 406
+            return response()->json(['error' => $errors, 'code' => $code], $code);
+        }
 
         $board = Board::create([
             'name' => $request->name,
