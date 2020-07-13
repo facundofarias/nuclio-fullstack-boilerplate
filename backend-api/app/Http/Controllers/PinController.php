@@ -38,7 +38,7 @@ class PinController extends Controller
 
         if($pinValidator->fails()) {
             $errors = $pinValidator->errors()->getMessages();
-            $code = Response::HTTP_NOT_ACCEPTABLE; // 406
+            $code = Response::HTTP_NOT_ACCEPTABLE;
             return response()->json(['error' => $errors, 'code' => $code], $code);
         }
 

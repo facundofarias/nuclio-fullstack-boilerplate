@@ -38,7 +38,7 @@ class BoardController extends Controller
 
         if($boardValidator->fails()) {
             $errors = $boardValidator->errors()->getMessages();
-            $code = Response::HTTP_NOT_ACCEPTABLE; // 406
+            $code = Response::HTTP_NOT_ACCEPTABLE;
             return response()->json(['error' => $errors, 'code' => $code], $code);
         }
 
