@@ -23,6 +23,22 @@ class PinController extends Controller
     }
 
     /**
+     * Show a list of all the pins that matches the search
+     *
+     * @param $query
+     * @return JsonResponse
+     */
+    public function search($query)
+    {
+        Log::info('Retrieving all pins related to -> ' . $query);
+        $pins = Pin::where('note', 'LIKE', '%' . $query . '%')
+            ->orWhere('color', 'LIKE', '%' . $query . '%')->get();
+
+        Log::info('Retrieving query -> ' . $pins);
+        return response()->json($pins);
+    }
+
+    /**
      * Create a new pin instance.
      *
      * @param  Request  $request

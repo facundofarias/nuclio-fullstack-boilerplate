@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Response;
 use Validator;
 use App\Board;
@@ -40,6 +41,12 @@ class BoardController extends Controller
             $errors = $boardValidator->errors()->getMessages();
             $code = Response::HTTP_NOT_ACCEPTABLE;
             return response()->json(['error' => $errors, 'code' => $code], $code);
+        }
+
+        if (User::where('id', $request->user_id)->count() == 0)
+        {
+            $code = Response::HTTP_NOT_ACCEPTABLE;
+            return response()->json(['error' => 'User Id does not exist', 'code' => $code], $code);
         }
 
         $board = Board::create([
