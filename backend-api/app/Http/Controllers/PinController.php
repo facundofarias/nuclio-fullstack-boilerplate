@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Board;
 use App\Pin;
+use Exception;
 use Validator;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -58,15 +60,22 @@ class PinController extends Controller
             return response()->json(['error' => $errors, 'code' => $code], $code);
         }
 
-        $pin = Pin::create([
-            'note' => $request->note,
-            'color' => $request->color,
-            'media_url' => $request->media_url,
-            'board_id' => $request->board_id,
-        ]);
+        try {
+            $board = Board::where('id', $request->board_id)->firstOrFail();
+            $pin = Pin::create([
+                'note' => $request->note,
+                'color' => $request->color,
+                'media_url' => $request->media_url,
+                'board_id' => $board->id,
+            ]);
 
-        $pin->save();
-        return response()->json("Created", 201);
+            $pin->save();
+            return response()->json("Created", 201);
+
+        } catch (Exception $e) {
+            $code = Response::HTTP_NOT_ACCEPTABLE;
+            return response()->json(['error' => 'Board Id does not exist', 'code' => $code], $code);
+        }
     }
 
     /**
