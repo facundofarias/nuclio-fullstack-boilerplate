@@ -41,3 +41,10 @@ Route::get('pins', 'PinController@all');
 Route::get('pins/{id}', 'PinController@getById');
 Route::get('pins/board/{boardId}', 'PinController@GetByBoard');
 Route::post('pins', 'PinController@create');
+
+/*
+|--------------------------------------------------------------------------
+| Generic Routes
+|--------------------------------------------------------------------------
+*/
+Route::get('search/{query}', 'PinController@search');

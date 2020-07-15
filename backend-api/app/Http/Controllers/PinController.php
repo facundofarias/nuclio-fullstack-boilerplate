@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Board;
 use App\Pin;
+use Exception;
 use Validator;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -23,6 +25,22 @@ class PinController extends Controller
     }
 
     /**
+     * Show a list of all the pins that matches the search
+     *
+     * @param $query
+     * @return JsonResponse
+     */
+    public function search($query)
+    {
+        Log::info('Retrieving all pins related to -> ' . $query);
+        $pins = Pin::where('note', 'LIKE', '%' . $query . '%')
+            ->orWhere('color', 'LIKE', '%' . $query . '%')->get();
+
+        Log::info('Retrieving query -> ' . $pins);
+        return response()->json($pins);
+    }
+
+    /**
      * Create a new pin instance.
      *
      * @param  Request  $request
@@ -38,19 +56,26 @@ class PinController extends Controller
 
         if($pinValidator->fails()) {
             $errors = $pinValidator->errors()->getMessages();
-            $code = Response::HTTP_NOT_ACCEPTABLE; // 406
+            $code = Response::HTTP_NOT_ACCEPTABLE;
             return response()->json(['error' => $errors, 'code' => $code], $code);
         }
 
-        $pin = Pin::create([
-            'note' => $request->note,
-            'color' => $request->color,
-            'media_url' => $request->media_url,
-            'board_id' => $request->board_id,
-        ]);
+        try {
+            $board = Board::where('id', $request->board_id)->firstOrFail();
+            $pin = Pin::create([
+                'note' => $request->note,
+                'color' => $request->color,
+                'media_url' => $request->media_url,
+                'board_id' => $board->id,
+            ]);
 
-        $pin->save();
-        return response()->json("Created", 201);
+            $pin->save();
+            return response()->json("Created", 201);
+
+        } catch (Exception $e) {
+            $code = Response::HTTP_NOT_ACCEPTABLE;
+            return response()->json(['error' => 'Board Id does not exist', 'code' => $code], $code);
+        }
     }
 
     /**
