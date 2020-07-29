@@ -11,6 +11,20 @@
 |
 */
 
+Route::group([
+
+    'middleware' => 'api',
+    'prefix' => 'auth'
+
+], function ($router) {
+
+    Route::post('login', 'AuthController@login');
+    Route::post('logout', 'AuthController@logout');
+    Route::post('refresh', 'AuthController@refresh');
+    Route::get('me', 'AuthController@me');
+
+});
+
 /*
 |--------------------------------------------------------------------------
 | User Routes
@@ -18,6 +32,7 @@
 */
 
 Route::get('users', 'UserController@all');
+Route::post('users', 'UserController@create');
 Route::get('users/{id}', 'UserController@getById');
 Route::get('users/email/{email}', 'UserController@getByEmail');
 Route::get('users/username/{username}', 'UserController@getByUsername');
