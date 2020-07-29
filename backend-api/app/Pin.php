@@ -15,6 +15,14 @@ class Pin extends Model
     }
 
     /**
+     * Get the tags for the given pin.
+     */
+    public function tags()
+    {
+        return $this->hasMany('App\Tag');
+    }
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array

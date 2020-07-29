@@ -21,7 +21,7 @@ class PinController extends Controller
     public function all()
     {
         Log::info('Retrieving all pins');
-        return response()->json(Pin::all());
+        return response()->json(Pin::with('tags')->get());
     }
 
     /**
