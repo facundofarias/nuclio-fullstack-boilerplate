@@ -11,7 +11,7 @@ class Tag extends Model
      */
     public function pin()
     {
-        return $this->belongsTo('App\Pin');
+        return $this->belongsToMany('App\Pin');
     }
 
     /**
