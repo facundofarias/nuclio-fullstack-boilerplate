@@ -19,6 +19,14 @@ class User extends Authenticatable implements JWTSubject
     }
 
     /**
+     * Get the city for the given user.
+     */
+    public function city()
+    {
+        return $this->hasOne('App\City');
+    }
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
