@@ -15,7 +15,7 @@ class User extends Authenticatable implements JWTSubject
      */
     public function boards()
     {
-        return $this->hasMany('App\Board');
+        return $this->hasMany('App\Board')
     }
 
     /**
