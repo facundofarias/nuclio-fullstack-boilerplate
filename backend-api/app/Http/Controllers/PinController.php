@@ -33,8 +33,7 @@ class PinController extends Controller
     public function search($query)
     {
         Log::info('Retrieving all pins related to -> ' . $query);
-        $pins = Pin::where('note', 'LIKE', '%' . $query . '%')
-            ->orWhere('color', 'LIKE', '%' . $query . '%')->get();
+        $pins = $this->searchService->search($query);
 
         Log::info('Retrieving query -> ' . $pins);
         return response()->json($pins);

@@ -70,4 +70,4 @@ Route::post('pins', 'TagController@create');
 | Generic Routes
 |--------------------------------------------------------------------------
 */
-Route::get('search/{query}', 'PinController@search');
+Route::get('search/{query}', 'SearchController@search');
