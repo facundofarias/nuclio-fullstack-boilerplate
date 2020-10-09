@@ -7,11 +7,11 @@ use App\User;
 class UserTest extends BaseTestCase
 {
     /**
-     * Test when having the user count.
+     * Test the user seeds.
      *
      * @return void
      */
-    public function testUsersCount()
+    public function testUsersSeeds()
     {
         // When
         $usersCount = User::all()->count();
