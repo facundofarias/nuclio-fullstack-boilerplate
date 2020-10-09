@@ -1,4 +1,4 @@
-CREATE TABLE pin_tag
+CREATE TABLE IF NOT EXISTS pin_tag
 (
     id          bigint unsigned auto_increment,
     created_at  timestamp           null,

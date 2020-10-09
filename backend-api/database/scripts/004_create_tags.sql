@@ -1,4 +1,4 @@
-CREATE TABLE tags
+CREATE TABLE IF NOT EXISTS tags
 (
     id          bigint unsigned auto_increment,
     tag         varchar(255)        not null,

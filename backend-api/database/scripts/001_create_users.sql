@@ -1,4 +1,4 @@
-CREATE TABLE users
+CREATE TABLE IF NOT EXISTS users
 (
     id                bigint unsigned auto_increment,
     email             varchar(255) not null,
@@ -12,6 +12,5 @@ CREATE TABLE users
     created_at        timestamp    null,
     updated_at        timestamp    null,
     PRIMARY KEY(id),
-    INDEX (email),
     CONSTRAINT users_email_unique UNIQUE (email)
 );

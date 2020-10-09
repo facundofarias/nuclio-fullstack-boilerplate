@@ -1,4 +1,4 @@
-CREATE TABLE boards
+CREATE TABLE IF NOT EXISTS boards
 (
     id          bigint unsigned auto_increment,
     name        varchar(255)        not null,

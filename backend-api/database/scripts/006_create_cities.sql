@@ -1,4 +1,4 @@
-CREATE TABLE cities
+CREATE TABLE IF NOT EXISTS cities
 (
     id                bigint unsigned auto_increment,
     name              varchar(255) not null,

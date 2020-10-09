@@ -1,4 +1,4 @@
-CREATE TABLE pins
+CREATE TABLE IF NOT EXISTS pins
 (
     id          bigint unsigned auto_increment,
     note        varchar(255)        not null,

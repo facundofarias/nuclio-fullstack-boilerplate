@@ -8,14 +8,18 @@ use Tests\TestCase;
 class ExampleTest extends TestCase
 {
     /**
-     * A basic test example.
+     * A test that will check if the response is 200
      *
      * @return void
      */
-    public function testBasicTest()
+    public function testStatusIs200OK()
     {
+        // Given
+
+        // When
         $response = $this->get('/');
 
+        // Then
         $response->assertStatus(200);
     }
 }
